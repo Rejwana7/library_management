@@ -1,0 +1,32 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.lib-nav{
+    font-family: Hind Guntur, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
+}
+.lib-logo{
+    mix-blend-mode: multiply;
+    width:80px;
+  
+}
+
+.content{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align: center;
+    margin-top: 40px;
+}
+.content h1{
+    font-size: 30px;
+    color:black;
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-family: Hind Guntur, sans-serif;
+    font-style: italic;
+    font-weight: bold;
+}

@@ -1,0 +1,67 @@
+{%extends "base.html"%}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{%block content %}
+
+<div class="w-75 m-auto ">
+ 
+  
+  <h3 class="mt-3 text-primary fst-italic fs-3">User Information</h3>
+  <h4><strong>Username:</strong>{{user.username}}</h4>
+  <h4><strong>Full Name:</strong>{{user.first_name}} {{user.last_name}}</h4> 
+  <h4><strong>Email:</strong>{{user.email}} </h4> 
+  <a href="{% url 'edit_profile'%}" class="btn btn-warning mt-2">Edit profile</a>
+ 
+
+ 
+</div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Book Name</th>
+        <th scope="col">Book Price</th>
+        <th scope="col">Borrow date</th>
+        <th scope="col">Transaction Type </th>
+        <th scope="col">Amount </th>
+        <th scope="col">Balance </th>
+        <th scope="col">Balance after Transaction</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+
+        {% for transaction in object_list %}
+        
+        <td>{{transaction.book.book_name}}</td>
+        <td>{{transaction.book.price}}</td>
+        <td>{{transaction.timestamp}}</td>
+        <td>{{transaction.transaction_type}}</td>
+        <td>{{transaction.amount}}</td>
+        <td>{{transaction.user.balance}}</td>
+        <td>{{transaction.balance_after_transaction}}</td>
+        <td>
+            {% if transaction.transaction_type == 3 and not transaction.is_returned %}
+            <a href="{% url 'return_book' transaction.book.id %}" class="btn btn-sm btn-danger">Return</a>
+
+            {% elif transaction.transaction_type == 4 %}
+            <a class="btn btn-sm btn-info">Sucessfully Return</a>
+           
+            {% else %}
+            {% endif %}
+            {% if transaction.transaction_type == 3 %}
+            <a href="{%url 'book_detail' transaction.book.id %}" class="btn btn-warning">Reveiew</a>
+            {% endif %}
+         </td>
+      </tr>
+      {%endfor%}
+      
+    </tbody>
+  </table>
+
+
+
+{%endblock%}
